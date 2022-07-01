@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
+import { LoginComponent } from './pages/login/login.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TopbarComponent
+    TopbarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-	MaterialModule
+	MaterialModule,
+	FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
