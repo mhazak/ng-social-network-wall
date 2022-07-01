@@ -7,7 +7,7 @@ import { TopbarComponent } from './components/topbar/topbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material.module';
 import { LoginComponent } from './pages/login/login.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAccountComponent } from './pages/create-account/create-account.component';
 
 @NgModule({
@@ -22,7 +22,8 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
     AppRoutingModule,
     BrowserAnimationsModule,
 	MaterialModule,
-	FormsModule
+	FormsModule,
+	ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
