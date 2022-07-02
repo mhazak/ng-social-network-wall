@@ -13,13 +13,15 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
 import { StoreModule } from '@ngrx/store';
 
 import { reducers } from './app.reducer';
+import { PostsComponent } from './pages/posts/posts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopbarComponent,
     LoginComponent,
-    CreateAccountComponent
+    CreateAccountComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
