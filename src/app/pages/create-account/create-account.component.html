@@ -30,12 +30,12 @@
 					<mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
 				</button>
 			</mat-form-field>
-		</form>
 
-		<div class="buttons-container" style="margin-top: 2rem;">
-			<button mat-raised-button class="login-button" type="submit">Sign up</button>
-			<p>OR</p>
-			<button routerLink="/login" mat-raised-button>Switch to login</button>
-		</div>
+			<div class="buttons-container" style="margin-top: 2rem;">
+				<button [disabled]="signupForm.invalid" mat-raised-button class="login-button" type="submit">Sign up</button>
+				<p>OR</p>
+				<button routerLink="/login" mat-raised-button>Switch to login</button>
+			</div>
+		</form>
 	</div>
 </div>
