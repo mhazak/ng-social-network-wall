@@ -7,6 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatCardModule } from '@angular/material/card';
+import { MaterialFileInputModule } from 'ngx-material-file-input';
 
 @NgModule({
 	imports: [
@@ -16,7 +17,8 @@ import { MatCardModule } from '@angular/material/card';
 		MatIconModule,
 		MatSnackBarModule,
 		MatMenuModule,
-		MatCardModule
+		MatCardModule,
+		MaterialFileInputModule
 	],
 	exports: [
 		MatButtonModule,
@@ -25,7 +27,8 @@ import { MatCardModule } from '@angular/material/card';
 		MatIconModule,
 		MatSnackBarModule,
 		MatMenuModule,
-		MatCardModule
+		MatCardModule,
+		MaterialFileInputModule
 	]
 })
 
