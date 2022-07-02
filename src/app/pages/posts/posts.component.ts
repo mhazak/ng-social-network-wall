@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { PostService } from 'src/app/services/post/post.service';
+
+import { Store } from '@ngrx/store';
+
+import * as fromRoot from '../../app.reducer';
+import { User } from 'src/app/services/user/user.model';
 
 @Component({
   selector: 'app-posts',
@@ -7,9 +14,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PostsComponent implements OnInit {
 
-  constructor() { }
+  	constructor(private postService: PostService, private store: Store<fromRoot.State>) { }
 
-  ngOnInit(): void {
-  }
 
+	postForm = new FormGroup({
+		text: new FormControl('', [Validators.required]),
+		file: new FormControl()
+	});
+
+  	ngOnInit(): void {
+  	}
+
+  	// onFileSelected (event: any) {
+	// 	console.log({file: event.target.files, event});
+	// 	const file = event.target.files[0];
+	// 	this.postService.fileUpload(file);
+  	// }
+
+	onPost() {
+		const _file = this.postForm.value['file']._files[0];
+		this.postService.post({
+			file: _file,
+			text: this.postForm.value['text']
+		})
+	}
 }
