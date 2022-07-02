@@ -17,6 +17,7 @@ export class UserService {
 	constructor(private http: HttpClient, private uiService: UiService, private store: Store<{ user: fromRoot.State }>, private router: Router) { }
 
 	initAuthListener () {
+		this.store.dispatch(new UserActions.CheckAuthenticated());
 		this.store.select(fromRoot.getIsAuth).subscribe(isAuth => {
 			console.log({isAuth});
 			if (isAuth) {
@@ -29,6 +30,7 @@ export class UserService {
 		})
 	}
 
+	// TODO hash password!!!
 	createUser(user: User) {
 		this.http.post<{ email: string, password: string, id: number }>(environment.backend + '/users', user).subscribe(res => {
 			console.log({res});
@@ -40,7 +42,6 @@ export class UserService {
 
 	login(user: User) {
 		this.http.get<User[]>(environment.backend + '/users?email=' + user.email).subscribe(res => {
-			console.log({res});
 			if (!res.length) {
 				this.uiService.snackbarOpen('User was not founded! Please check your e-mail address.', null, { duration: 3000 })
 				console.log('no users founded!');
@@ -60,7 +61,6 @@ export class UserService {
 	}
 
 	logout() {
-		console.log('logout!');
 		this.store.dispatch(new UserActions.SetUnauthenticated());
 	}
 
