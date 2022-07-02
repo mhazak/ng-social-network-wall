@@ -10,6 +10,9 @@ import { AppComponent } from './app.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CreateAccountComponent } from './pages/create-account/create-account.component';
+import { StoreModule } from '@ngrx/store';
+
+import { reducers } from './app.reducer';
 
 @NgModule({
   declarations: [
@@ -25,7 +28,8 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
 	MaterialModule,
 	FormsModule,
 	ReactiveFormsModule,
-	HttpClientModule
+	HttpClientModule,
+	StoreModule.forRoot(reducers)
   ],
   providers: [],
   bootstrap: [AppComponent]
