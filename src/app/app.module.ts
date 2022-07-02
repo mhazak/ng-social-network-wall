@@ -15,6 +15,12 @@ import { StoreModule } from '@ngrx/store';
 import { reducers } from './app.reducer';
 import { PostsComponent } from './pages/posts/posts.component';
 import { UsermenuComponent } from './components/topbar/usermenu/usermenu.component';
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { provideStorage, getStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -33,7 +39,12 @@ import { UsermenuComponent } from './components/topbar/usermenu/usermenu.compone
 	FormsModule,
 	ReactiveFormsModule,
 	HttpClientModule,
-	StoreModule.forRoot(reducers)
+	StoreModule.forRoot(reducers),
+ 	AngularFireModule.initializeApp(environment.firebase),
+  	AngularFireStorageModule,
+   provideFirebaseApp(() => initializeApp(environment.firebase)),
+   provideFirestore(() => getFirestore()),
+   provideStorage(() => getStorage())
   ],
   providers: [],
   bootstrap: [AppComponent]
