@@ -14,6 +14,7 @@ import { StoreModule } from '@ngrx/store';
 
 import { reducers } from './app.reducer';
 import { PostsComponent } from './pages/posts/posts.component';
+import { UsermenuComponent } from './components/topbar/usermenu/usermenu.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { PostsComponent } from './pages/posts/posts.component';
     TopbarComponent,
     LoginComponent,
     CreateAccountComponent,
-    PostsComponent
+    PostsComponent,
+    UsermenuComponent
   ],
   imports: [
     BrowserModule,

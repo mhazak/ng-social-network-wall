@@ -7,17 +7,32 @@ import * as fromRoot from '../../app.reducer';
 import * as UserActions from './user.actions';
 
 import { User } from './user.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-	constructor(private http: HttpClient, private uiService: UiService, private store: Store<{ user: fromRoot.State }>) { }
+	constructor(private http: HttpClient, private uiService: UiService, private store: Store<{ user: fromRoot.State }>, private router: Router) { }
+
+	initAuthListener () {
+		this.store.select(fromRoot.getIsAuth).subscribe(isAuth => {
+			console.log({isAuth});
+			if (isAuth) {
+				this.router.navigate(['/posts']);
+				// this.store.dispatch(new UserActions.SetAuthenticated());
+			} else {
+				this.router.navigate(['/login']);
+				this.store.dispatch(new UserActions.SetUnauthenticated());
+			}
+		})
+	}
 
 	createUser(user: User) {
-		this.http.post(environment.backend + '/users', user).subscribe(res => {
+		this.http.post<{ email: string, password: string, id: number }>(environment.backend + '/users', user).subscribe(res => {
 			console.log({res});
+			this.store.dispatch(new UserActions.SetAuthenticated({ email: res.email, password: res.password }));
 		}, err => {
 			console.log({err});
 		})
@@ -42,6 +57,11 @@ export class UserService {
 		}, err => {
 			console.log({ err });
 		})
+	}
+
+	logout() {
+		console.log('logout!');
+		this.store.dispatch(new UserActions.SetUnauthenticated());
 	}
 
 }
