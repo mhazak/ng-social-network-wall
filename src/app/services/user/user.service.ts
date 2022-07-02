@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { UiService } from './ui/ui.service';
+import { UiService } from '../ui/ui.service';
 
 import { User } from './user.model';
 
