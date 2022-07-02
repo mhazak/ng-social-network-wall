@@ -1,19 +1,38 @@
 <div class="container">
 	<div class="form-container">
 		<h1 class="title">Sign up</h1>
-		<form>
+
+		<form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
 			<mat-form-field appearance="outline">
 				<mat-label>E-mail address</mat-label>
-				<input color="primary" type="email" matInput placeholder="Type your e-mail adress">
+				<input
+					required
+					formControlName="email"
+					color="primary"
+					type="email"
+					matInput
+					placeholder="Type your e-mail adress"
+				>
 			</mat-form-field>
 
 			<mat-form-field appearance="outline">
 				<mat-label>Password</mat-label>
-				<input type="password" matInput placeholder="Type your password">
+				<input
+					formControlName="password"
+					matInput
+					required
+					[type]="hidePassword ? 'password' : 'text'"
+					placeholder="Type your password"
+				>
+				<mat-error *ngIf="!signupForm.get('password')?.value.length">Field password is required!</mat-error>
+				<mat-error *ngIf="signupForm.get('password')?.value.length < 6 && signupForm.get('password')?.value.length">Password needs to contains at least 6 characters!</mat-error>
+				<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+					<mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+				</button>
 			</mat-form-field>
 		</form>
 
-		<div class="buttons-container">
+		<div class="buttons-container" style="margin-top: 2rem;">
 			<button mat-raised-button class="login-button" type="submit">Sign up</button>
 			<p>OR</p>
 			<button routerLink="/login" mat-raised-button>Switch to login</button>

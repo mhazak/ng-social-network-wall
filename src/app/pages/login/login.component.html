@@ -1,22 +1,51 @@
 <div class="container">
 	<div class="form-container">
 		<h1 class="title">Login</h1>
-		<form>
+
+		<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
 			<mat-form-field appearance="outline">
 				<mat-label>E-mail address</mat-label>
-				<input color="primary" type="email" matInput placeholder="Type your e-mail adress">
+				<input
+					formControlName="email"
+					matInput
+					required
+					color="primary"
+					type="email"
+					placeholder="Type your e-mail adress"
+				>
+				<mat-error *ngIf="!loginForm.get('email')?.value.length">Please fill your e-mail address</mat-error>
+				<mat-error *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.value.length">Wrong format of email address</mat-error>
+				<mat-hint>Please type your e-mail address</mat-hint>
+
 			</mat-form-field>
 
 			<mat-form-field appearance="outline">
 				<mat-label>Password</mat-label>
-				<input type="password" matInput placeholder="Type your password">
+				<input
+					formControlName="password"
+					matInput
+					required
+					[type]="hidePassword ? 'password' : 'text'"
+					placeholder="Type your password"
+				>
+				<button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
+					<mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+				</button>
 			</mat-form-field>
+
+			<div class="buttons-container">
+				<button
+					[disabled]="loginForm.invalid"
+					mat-raised-button
+					class="login-button"
+					type="submit">
+						Login
+				</button>
+				<p>OR</p>
+				<button routerLink="/signup" mat-raised-button>Create account</button>
+			</div>
 		</form>
 
-		<div class="buttons-container">
-			<button mat-raised-button class="login-button" type="submit">Login</button>
-			<p>OR</p>
-			<button routerLink="/signup" mat-raised-button>Create account</button>
-		</div>
 	</div>
 </div>
