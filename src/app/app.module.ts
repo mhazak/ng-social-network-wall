@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 import { AppComponent } from './app.component';
 import { TopbarComponent } from './components/topbar/topbar.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
 import { LoginComponent } from './pages/login/login.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CreateAccountComponent } from './pages/create-account/create-account.component';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { CreateAccountComponent } from './pages/create-account/create-account.co
     BrowserAnimationsModule,
 	MaterialModule,
 	FormsModule,
-	ReactiveFormsModule
+	ReactiveFormsModule,
+	HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
