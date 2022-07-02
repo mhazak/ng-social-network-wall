@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ng-social-network-wall": {
+      "hosting": {
+        "social-network-wall": [
+          "ng-social-network-wall"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ng-social-network-wall"
+  }
+}

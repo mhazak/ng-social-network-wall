@@ -27,7 +27,7 @@
               "src/assets"
             ],
             "styles": [
-				"src/assets/fonts.css",
+              "src/assets/fonts.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
@@ -96,11 +96,21 @@
               "src/assets"
             ],
             "styles": [
-				"src/assets/fonts.css",
+              "src/assets/fonts.css",
               "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "src/styles.css"
             ],
             "scripts": []
+          }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "prerender": false,
+            "ssr": false,
+            "browserTarget": "social-network-wall:build:production",
+            "firebaseProject": "ng-social-network-wall",
+            "firebaseHostingSite": "ng-social-network-wall"
           }
         }
       }
