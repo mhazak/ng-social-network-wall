@@ -21,6 +21,7 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+import { PostComponent } from './pages/posts/post/post/post.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { provideStorage, getStorage } from '@angular/fire/storage';
     LoginComponent,
     CreateAccountComponent,
     PostsComponent,
-    UsermenuComponent
+    UsermenuComponent,
+    PostComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 
 import * as fromRoot from '../../app.reducer';
 import { User } from 'src/app/services/user/user.model';
+import { Observable } from 'rxjs';
+import { Post } from './post.model';
 
 @Component({
   selector: 'app-posts',
@@ -16,13 +18,15 @@ export class PostsComponent implements OnInit {
 
   	constructor(private postService: PostService, private store: Store<fromRoot.State>) { }
 
-
+	posts$: Observable<Post[]>;
 	postForm = new FormGroup({
 		text: new FormControl('', [Validators.required]),
 		file: new FormControl()
 	});
 
   	ngOnInit(): void {
+		this.posts$ = this.store.select(fromRoot.getPosts);
+		this.postService.getPosts();
   	}
 
   	// onFileSelected (event: any) {
