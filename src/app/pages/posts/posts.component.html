@@ -1,27 +1,6 @@
 <div class="container">
 	<div class="content-wrapper">
-
-		<form [formGroup]="postForm" (ngSubmit)="onPost">
-			<mat-form-field appearance="fill">
-				<textarea formControlName="text" matInput cdkTextareaAutosize cdkAutosizeMinRows="5" placeholder="Type something..."></textarea>
-			</mat-form-field>
-
-			<mat-form-field class="image-button">
-				<ngx-mat-file-input formControlName="file" class="image-input" #removableInput placeholder="Upload picture"></ngx-mat-file-input>
-				<button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
-					<mat-icon>clear</mat-icon>
-				</button>
-
-			</mat-form-field>
-
-			<div class="new-post-actions-container">
-				<button mat-raised-button class="post-button" (click)="onPost()">Post</button>
-			</div>
-		</form>
-
-		{{ posts$ | async | json }}
-		<app-post></app-post>
-
+		<app-new-post></app-new-post>
+		<app-post *ngFor="let post of (posts$ | async)" [post]="post"></app-post>
 	</div>
-
 </div>

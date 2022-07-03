@@ -1,0 +1,9 @@
+mat-form-field {
+	width: 100%;
+}
+
+.post-button {
+    background-color: #4285F4;
+    color: white;
+    width: 118px;
+}

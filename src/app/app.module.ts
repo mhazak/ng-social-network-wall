@@ -22,6 +22,7 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { PostComponent } from './pages/posts/post/post.component';
+import { NewPostComponent } from './pages/posts/new-post/new-post.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { PostComponent } from './pages/posts/post/post.component';
     CreateAccountComponent,
     PostsComponent,
     UsermenuComponent,
-    PostComponent
+    PostComponent,
+    NewPostComponent
   ],
   imports: [
     BrowserModule,

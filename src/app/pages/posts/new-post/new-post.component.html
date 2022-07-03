@@ -1,0 +1,22 @@
+<form [formGroup]="postForm" (ngSubmit)="onPost">
+
+	<mat-form-field appearance="fill">
+		<input formControlName="title" matInput type="text" placeholder="Post title">
+	</mat-form-field>
+
+	<mat-form-field appearance="fill">
+		<textarea formControlName="text" matInput cdkTextareaAutosize cdkAutosizeMinRows="5" placeholder="Post content"></textarea>
+	</mat-form-field>
+
+	<mat-form-field class="image-button">
+		<ngx-mat-file-input formControlName="file" class="image-input" #removableInput placeholder="Upload picture"></ngx-mat-file-input>
+		<button mat-icon-button matSuffix *ngIf="!removableInput.empty" (click)="removableInput.clear($event)">
+			<mat-icon>clear</mat-icon>
+		</button>
+
+	</mat-form-field>
+
+	<div class="new-post-actions-container">
+		<button mat-raised-button class="post-button" (click)="onPost()">Post</button>
+	</div>
+</form>
