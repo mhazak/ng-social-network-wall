@@ -1,4 +1,5 @@
 export interface Post {
+	id?: string,
 	email: string;
     imageURL: string;
     text: string;
