@@ -3,16 +3,16 @@
 		<mat-card-title>{{ post.title }}</mat-card-title>
 	</mat-card-header>
 
-	<img mat-card-image [src]="post.imageURL" alt="Photo of a Shiba Inu">
+	<img mat-card-image [src]="post.imageURL" alt="Photo of a {{ post.title }}">
 
 	<mat-card-content>
 		<p>{{ post.text }}</p>
 	</mat-card-content>
 
 	<mat-card-actions>
-		<button mat-icon-button class="like-button" disableRipple="true">
-			<mat-icon>favorite_border</mat-icon>
-		</button>
+		<button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
+			<mat-icon>favorite</mat-icon>
+		  </button>
 		<span *ngIf="post.likes">10 liked it</span>
 		<span *ngIf="!post.likes">Like the post!</span>
 		<!-- <button mat-button>SHARE</button> -->
@@ -20,17 +20,17 @@
 
 	<div class="comments-container">
 		<div class="comments">
-			<div class="title">Comments</div>
+			<h2 class="title">Comments</h2>
 			<div *ngIf="post.comments">
 				<p><b>John:</b> Woow! Love it!</p>
 			</div>
 		</div>
 	</div>
 
-	<div class="comment-input">
+	<form [formGroup]="commentForm" class="comment-input" (ngSubmit)="onComment()">
 		<mat-form-field class="comment-form-field">
-			<textarea matInput type="text" placeholder="Add a comment"></textarea>
+			<textarea formControlName="comment" matInput type="text" placeholder="Add a comment"></textarea>
 		</mat-form-field>
-		<button class="comment-button" mat-button>Comment</button>
-	</div>
+		<button *ngIf="commentForm.get('comment').value?.length" class="comment-button" mat-raised-button color="primary">Post Comment</button>
+	</form>
 </mat-card>

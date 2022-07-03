@@ -1,20 +1,24 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Firestore, collectionData, collection, addDoc } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, addDoc, doc, updateDoc, FieldValue } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
 import { finalize, map, Observable } from 'rxjs';
 import { Post } from 'src/app/pages/posts/post.model';
 import * as fromRoot from '../../app.reducer';
+import { User } from '../user/user.model';
 import * as PostActions from './post.actions';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-	constructor(private storage: AngularFireStorage, private firestore: Firestore, private store: Store<fromRoot.State>) { }
+	constructor(private db: AngularFirestore, private storage: AngularFireStorage, private firestore: Firestore, private store: Store<fromRoot.State>) { }
 
 	posts$: Observable<any[]>;
+	postCollection: AngularFirestoreCollection<Post[]>;
 
 	fileUpload (file: File) : Promise<string> {
 		return new Promise((resolve, reject) => {
@@ -58,13 +62,20 @@ export class PostService {
 	}
 
 	getPosts () {
-
 		const _collection = collection(this.firestore, 'posts');
-
 		collectionData(_collection, { idField: 'id'}).subscribe((res: Post[]) => {
 			console.log('dispatch', {res});
 			this.store.dispatch(new PostActions.SetPosts(res));
-			// console.log({res})
+		})
+	}
+
+	async postComment(model: {id: string, comment: string}) {
+		this.store.select(fromRoot.getUser).subscribe((user: User) => {
+			this.db.collection('posts').doc(model.id).collection('comments').add({
+				email: user.email,
+				comment: model.comment,
+				dtcreated: new Date().toString()
+			})
 		})
 	}
 }
