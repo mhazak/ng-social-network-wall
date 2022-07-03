@@ -1,0 +1,36 @@
+<mat-card class="post-card" hover>
+	<mat-card-header>
+		<mat-card-title>{{ post.title }}</mat-card-title>
+	</mat-card-header>
+
+	<img mat-card-image [src]="post.imageURL" alt="Photo of a Shiba Inu">
+
+	<mat-card-content>
+		<p>{{ post.text }}</p>
+	</mat-card-content>
+
+	<mat-card-actions>
+		<button mat-icon-button class="like-button" disableRipple="true">
+			<mat-icon>favorite_border</mat-icon>
+		</button>
+		<span *ngIf="post.likes">10 liked it</span>
+		<span *ngIf="!post.likes">Like the post!</span>
+		<!-- <button mat-button>SHARE</button> -->
+	</mat-card-actions>
+
+	<div class="comments-container">
+		<div class="comments">
+			<div class="title">Comments</div>
+			<div *ngIf="post.comments">
+				<p><b>John:</b> Woow! Love it!</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="comment-input">
+		<mat-form-field class="comment-form-field">
+			<textarea matInput type="text" placeholder="Add a comment"></textarea>
+		</mat-form-field>
+		<button class="comment-button" mat-button>Comment</button>
+	</div>
+</mat-card>
