@@ -23,6 +23,7 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { provideStorage, getStorage } from '@angular/fire/storage';
 import { PostComponent } from './pages/posts/post/post.component';
 import { NewPostComponent } from './pages/posts/new-post/new-post.component';
+import { CommentsComponent } from './pages/posts/comments/comments.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NewPostComponent } from './pages/posts/new-post/new-post.component';
     PostsComponent,
     UsermenuComponent,
     PostComponent,
-    NewPostComponent
+    NewPostComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
