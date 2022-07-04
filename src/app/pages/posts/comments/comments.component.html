@@ -1,8 +1,12 @@
 <div class="comments-container">
 	<div class="comments">
 		<h2 class="title">Comments</h2>
-		<div *ngIf="post.comments">
-			<p><b>John:</b> Woow! Love it!</p>
+		<div *ngIf="post.comments.length">
+
+			<div *ngFor="let comment of post.comments">
+				<b>{{ comment.email }}</b>
+				{{ comment.comment }}
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { PostService } from 'src/app/services/post/post.service';
+import { CommentsService } from 'src/app/services/comments/comments.service';
 
 @Component({
   selector: 'app-comments',
@@ -9,7 +9,7 @@ import { PostService } from 'src/app/services/post/post.service';
 })
 export class CommentsComponent implements OnInit {
 
-  constructor(private postService: PostService) { }
+  constructor(private commentsService: CommentsService) { }
 
 	@Input() post;
 	commentForm = new FormGroup({
@@ -17,7 +17,7 @@ export class CommentsComponent implements OnInit {
 	});
 
 	onComment() {
-		this.postService.postComment({
+		this.commentsService.postComment({
 			id: this.post.id,
 			comment: this.commentForm.value['comment']
 		})
