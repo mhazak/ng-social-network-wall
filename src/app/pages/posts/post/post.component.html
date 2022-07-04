@@ -17,20 +17,5 @@
 		<span *ngIf="!post.likes">Like the post!</span>
 		<!-- <button mat-button>SHARE</button> -->
 	</mat-card-actions>
-
-	<div class="comments-container">
-		<div class="comments">
-			<h2 class="title">Comments</h2>
-			<div *ngIf="post.comments">
-				<p><b>John:</b> Woow! Love it!</p>
-			</div>
-		</div>
-	</div>
-
-	<form [formGroup]="commentForm" class="comment-input" (ngSubmit)="onComment()">
-		<mat-form-field class="comment-form-field">
-			<textarea formControlName="comment" matInput type="text" placeholder="Add a comment"></textarea>
-		</mat-form-field>
-		<button *ngIf="commentForm.get('comment').value?.length" class="comment-button" mat-raised-button color="primary">Post Comment</button>
-	</form>
+	<app-comments [post]="post"></app-comments>
 </mat-card>

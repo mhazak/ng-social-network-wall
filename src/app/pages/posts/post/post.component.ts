@@ -12,21 +12,9 @@ export class PostComponent implements OnInit {
 
 	@Input() post: Post;
 
-	commentForm = new FormGroup({
-		comment: new FormControl('', [Validators.required])
-	});
-
   	constructor(private postService: PostService) { }
 
   	ngOnInit(): void {
   	}
-
-	onComment() {
-		this.postService.postComment({
-			id: this.post.id,
-			comment: this.commentForm.value['comment']
-		})
-		console.log({post: this.post, id: this.post.id });
-	}
 
 }
