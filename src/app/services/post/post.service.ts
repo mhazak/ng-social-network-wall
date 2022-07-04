@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import { Firestore, collectionData, collection, addDoc, doc, updateDoc, FieldValue } from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, doc, getDocs, query, where } from '@angular/fire/firestore';
 import { Store } from '@ngrx/store';
-import { finalize, map, Observable } from 'rxjs';
+import { finalize, Observable } from 'rxjs';
 import { Post } from 'src/app/pages/posts/post.model';
 import * as fromRoot from '../../app.reducer';
 import { User } from '../user/user.model';
 import * as PostActions from './post.actions';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { setDoc } from '@firebase/firestore';
 
 
 @Injectable({
@@ -44,6 +45,7 @@ export class PostService {
 
 	async post (post: { title: string, text: string, file: File }) {
 		console.log({post});
+
 		const _file = await this.fileUpload(post.file);
 
 		this.store.select(fromRoot.getUser).subscribe(_user => {
@@ -57,24 +59,41 @@ export class PostService {
 			}
 			console.log({postmodel});
 			const postsCollection = collection(this.firestore, 'posts');
-			return addDoc(postsCollection, postmodel);
+			const _tmp = doc(collection(this.firestore, 'posts'))
+			return setDoc(_tmp, postmodel);
 		})
 	}
 
-	getPosts () {
+	async getPosts () {
+
 		const _collection = collection(this.firestore, 'posts');
-		collectionData(_collection, { idField: 'id'}).subscribe((res: Post[]) => {
-			console.log('dispatch', {res});
-			this.store.dispatch(new PostActions.SetPosts(res));
-		})
+		collectionData(_collection, { idField: 'id' })
+			.subscribe(async (res: any) => {
+				const comment = collection(this.firestore, 'comments');
+				// find comments for post
+				for (const _post of res) {
+
+					const q = query(comment, where("postid", "==", _post.id));
+					const querySnapshot = await getDocs(q);
+					let comments = [];
+					querySnapshot.forEach((doc) => {
+						console.log({data: doc.data()});
+						comments.push(doc.data());
+					});
+					_post.comments = comments;
+				}
+				this.store.dispatch(new PostActions.SetPosts(res));
+			})
 	}
 
 	async postComment(model: {id: string, comment: string}) {
 		this.store.select(fromRoot.getUser).subscribe((user: User) => {
-			this.db.collection('posts').doc(model.id).collection('comments').add({
+			this.db.collection('comments').doc().set({
+				postid: model.id,
 				email: user.email,
 				comment: model.comment,
 				dtcreated: new Date().toString()
+
 			})
 		})
 	}
