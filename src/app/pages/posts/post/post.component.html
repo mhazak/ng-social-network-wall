@@ -1,3 +1,4 @@
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100" rel="stylesheet" />
 <mat-card class="post-card" hover>
 	<mat-card-header>
 		<mat-card-title>{{ post.title }}</mat-card-title>
@@ -10,8 +11,8 @@
 	</mat-card-content>
 
 	<mat-card-actions>
-		<button mat-icon-button color="warn" aria-label="Example icon button with a heart icon">
-			<mat-icon>favorite</mat-icon>
+		<button mat-icon-button aria-label="Example icon button with a heart icon" (click)="doILike = !doILike">
+			<mat-icon [ngClass]="doILike ? '' : 'material-symbols-outlined'" color="warn">favorite</mat-icon>
 		  </button>
 		<span *ngIf="post.likes">10 liked it</span>
 		<span *ngIf="!post.likes">Like the post!</span>
