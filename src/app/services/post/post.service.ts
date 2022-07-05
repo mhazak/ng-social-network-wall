@@ -77,27 +77,4 @@ export class PostService {
 			this.store.dispatch(new PostActions.SetPosts(res));
 		})
 	}
-
-	// async getUpdatedPost(id: string) {
-	// 	console.log({id});
-	// 	const snap = await getDoc(doc(this.firestore, 'posts', id))
-	// 	if (snap.exists()) {
-	// 		console.log(snap.data());
-	// 		const _post = snap.data();
-	// 		this.store.dispatch(new PostActions.CommentAdded(_post))
-	// 	} else {
-	// 		console.log('nothing has been founded');
-	// 	}
-		// const _collection = collection(this.firestore, 'posts')
-
-		// const _query = query(_collection, where(this.firestore.f, '==', id))
-		// const querySnapshot = await getDocs(_query);
-		// querySnapshot.forEach((doc) => {
-		// 	console.log({id}, doc.data());
-		// })
-		// _updatedPost.forEach(x => {
-		// 	console.log({data: x.data()});
-		// })
-		// console.log({_updatedPost});
-	// }
 }
