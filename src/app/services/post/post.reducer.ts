@@ -20,7 +20,6 @@ export function postReducer (state = initialState, action: PostActions) {
 			const _updatedPost = action.payload.post;
 			const _originalpost = state.posts.find(x => x.id == _updatedPost.id);
 			_originalpost.comments = _updatedPost.comments;
-			console.log({_originalpost, _updatedPost});
 			return {
 				... state,
 				posts: state.posts

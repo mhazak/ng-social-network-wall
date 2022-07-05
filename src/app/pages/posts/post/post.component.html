@@ -11,12 +11,12 @@
 	</mat-card-content>
 
 	<mat-card-actions>
-		<button mat-icon-button aria-label="Example icon button with a heart icon" (click)="doILike = !doILike">
+		<button mat-icon-button aria-label="Example icon button with a heart icon" (click)="postLike()">
 			<mat-icon [ngClass]="doILike ? '' : 'material-symbols-outlined'" color="warn">favorite</mat-icon>
 		  </button>
-		<span *ngIf="post.likes">10 liked it</span>
-		<span *ngIf="!post.likes">Like the post!</span>
-		<!-- <button mat-button>SHARE</button> -->
+		<span *ngIf="post.likes.amount">{{ post.likes.amount }} person{{ post.likes.amount > 1 ? 's' : ''}} likes it!</span>
+		<span *ngIf="!post.likes.amount">Be first who likes this post</span>
+
 	</mat-card-actions>
 	<app-comments [post]="post"></app-comments>
 </mat-card>

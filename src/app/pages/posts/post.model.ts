@@ -6,7 +6,7 @@ export interface Post {
 	title: string;
     likes?: {
 		amount: number,
-		persons: [{ email: string }]
+		items: [{ email: string, value: boolean, postid: string}]
 	},
 	dtcreated: Date,
     comments?:[{username:'', comment:''}]

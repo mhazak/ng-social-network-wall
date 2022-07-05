@@ -8,6 +8,7 @@ import * as UserActions from './user.actions';
 
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +17,12 @@ export class UserService {
 
 	constructor(private http: HttpClient, private uiService: UiService, private store: Store<{ user: fromRoot.State }>, private router: Router) { }
 
+	user$: Observable<User>;
+
 	initAuthListener () {
 		this.store.dispatch(new UserActions.CheckAuthenticated());
 		this.store.select(fromRoot.getIsAuth).subscribe(isAuth => {
-			console.log({isAuth});
+			this.user$ = this.store.select(fromRoot.getUser);
 			if (isAuth) {
 				this.router.navigate(['/posts']);
 				// this.store.dispatch(new UserActions.SetAuthenticated());
